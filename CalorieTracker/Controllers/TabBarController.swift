@@ -8,7 +8,7 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-   
+    
     private var homeTitleLabel: UILabel?
     var selectedDate: Date?
     
@@ -23,12 +23,12 @@ class TabBarController: UITabBarController {
     }
     
     private func setupTabs(){
-        let home = createNav(title: "Today", image: UIImage(systemName: "house"), identifier: "HomeController", buttonTitle: "calendar", action: #selector(calendarButtonTapped))
+        let home = createNav(title: "Diary", image: UIImage(systemName: "house"), identifier: "HomeController", buttonTitle: "calendar", action: #selector(calendarButtonTapped))
         let myAcc = createNav(title: "My account", image: UIImage(systemName: "person"), identifier: "MyAccountController", buttonTitle: "person.crop.circle", action: #selector(myAccountButtonTapped))
-       
+        
         self.setViewControllers([home, myAcc], animated: true)
     }
-
+    
     private func createNav(title: String, image: UIImage?, identifier: String, buttonTitle: String, action: Selector? = nil) -> UINavigationController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: identifier)
@@ -45,7 +45,7 @@ class TabBarController: UITabBarController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         nav.viewControllers.first?.navigationItem.titleView = titleLabel
         
-        if title == "Today" {
+        if title == "Diary" {
             self.homeTitleLabel = titleLabel
         }
         
@@ -57,21 +57,21 @@ class TabBarController: UITabBarController {
     }
     
     @objc private func myAccountButtonTapped() {
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            
-            let logOutAction = UIAlertAction(title: "Log out", style: .destructive) { _ in
-                self.logOut()
-            }
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
-            alertController.addAction(logOutAction)
-            alertController.addAction(cancelAction)
-            
-            if let selectedViewController = self.selectedViewController {
-            selectedViewController.present(alertController, animated: true, completion: nil)
-            }
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let logOutAction = UIAlertAction(title: "Log out", style: .destructive) { _ in
+            self.logOut()
         }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(logOutAction)
+        alertController.addAction(cancelAction)
+        
+        if let selectedViewController = self.selectedViewController {
+            selectedViewController.present(alertController, animated: true, completion: nil)
+        }
+    }
     
     func logOut() {
         self.dismiss(animated: true) {
@@ -101,8 +101,7 @@ class TabBarController: UITabBarController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             self.selectedDate = dateFormatter.date(from: date)
-            //self.viewControllers?.first?.navigationItem.titleView = date
-            //self.viewControllers?.first?.tabBarItem.title = date
+            
         }
     }
     

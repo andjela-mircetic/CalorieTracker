@@ -89,6 +89,53 @@ class FirebaseManager {
         }
         
     }
+    
+    func addDiary(diaries1: [String: Any], completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        let diariesRef = Database.database().reference().child("diaries")
+        diariesRef.observeSingleEvent(of: .value) { snapshot, _ in
+//            guard let diaries = snapshot.value as? [String: [String: Any]] else {
+//                completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve diaries"])))
+//                return
+//            }
+            
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: diaries1) else {
+                print("Error serializing diaries data to JSON")
+                completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error serializing diaries data to JSON"])))
+                return
+            }
+            
+            let endpoint = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/diaries.json"
+            var request = URLRequest(url: URL(string: endpoint)!)
+            request.httpMethod = "POST"
+            request.httpBody = jsonData
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let httpResponse = response as? HTTPURLResponse else {
+
+                    print("Invalid server response")
+                    completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid server response"])))
+                    return
+                }
+                
+                if (200...299).contains(httpResponse.statusCode) {
+                    print("Diary registered successfully!")
+                    DispatchQueue.main.async {
+                        completion(.success(()))
+                    }
+                } else {
+                    print("Error registering diary: \(httpResponse.statusCode)")
+                    if let responseData = data,
+                       let errorResponse = String(data: responseData, encoding: .utf8) {
+                        print("Error response: \(errorResponse)")
+                    }
+                    completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error registering diary"])))
+                    return
+                }
+            }
+            task.resume()
+        }
+    }
         
     func signInUser(username: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
         
@@ -234,9 +281,26 @@ class FirebaseManager {
                         
                         completion(.success(()))
                     } else {
-                       //ovde treba da se napravi novi objekat diary sa pocetnim vrednostima
-                        print("napravi objekat")
-                        completion(.success(()))
+                        
+                        let diariesData: [String: Any] = [
+                            "user": username,
+                            "date": date,
+                            "caloriesEaten": 0,
+                            "goalCalories": Int(UserInfo.shared.caloriesNeeded),
+                            "caloriesLeft": Int(UserInfo.shared.caloriesNeeded),
+                            "foods": [:]
+                        ]
+                        
+                        self.addDiary(diaries1: diariesData) { result in
+                            switch result {
+                            case .success():
+                                DiariesManager.shared.setDiaries(ud: diariesData)
+                                completion(.success(()))
+                            case .failure(_):
+                                completion(.failure(NSError(domain: "Diaries", code: 0, userInfo: [NSLocalizedDescriptionKey: "error creating diary"])))
+                            }
+                        }
+                       
                     }
                 } else {
                     completion(.failure(NSError(domain: "Diaries", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid JSON format"])))
@@ -302,6 +366,72 @@ class FirebaseManager {
                     }.resume()
                 } else {
                     completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "User not found"])))
+                }
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+
+    
+    func changeValueDiary(of key: String, with value: Any, isPost: Bool, completion: @escaping (Result<Void, Error>) -> Void) {
+        let username = UserInfo.shared.username
+        let date = DiariesManager.shared.date
+        let baseUrl = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/diaries.json"
+        guard let url = URL(string: baseUrl) else {
+            completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid server response"])))
+                return
+            }
+            
+            guard let responseData = data else {
+                completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                return
+            }
+           
+            do {
+                if let json = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: [String: Any]],
+                    let diary = json.values.first(where: { ($0["user"] as? String) == username && ($0["date"] as? String) == date}) {
+                   
+                    let did = json.first(where: { $0.value["user"] as? String == username && ($0.value["date"] as? String) == date})?.key as! String
+                   
+                    var updatedDiary = diary
+                    updatedDiary[key] = value
+                    
+                    guard let updatedData = try? JSONSerialization.data(withJSONObject: updatedDiary) else {
+                        completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error serializing user data to JSON"])))
+                        return
+                    }
+                    
+                    guard let updateUserUrl = URL(string: "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/diaries/\(did).json") else {
+                        completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+                        return
+                    }
+                    
+                    var updateRequest = URLRequest(url: updateUserUrl)
+                    
+                    updateRequest.httpMethod = isPost ? "POST" : "PUT"
+                    updateRequest.httpBody = updatedData
+                    
+                    URLSession.shared.dataTask(with: updateRequest) { _, _, updateError in
+                        if let updateError = updateError {
+                            completion(.failure(updateError))
+                        } else {
+                            completion(.success(()))
+                        }
+                    }.resume()
+                } else {
+                    completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Diary not found"])))
                 }
             } catch {
                 completion(.failure(error))

@@ -14,8 +14,8 @@
             filePath = "CalorieTracker/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "signInUser(username:password:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "CalorieTracker/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "signInUser(username:password:completion:)"
             landmarkType = "7">
             <Locations>
@@ -167,22 +167,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5B342A9C-B0C6-4162-A514-D9A6B7D0AB1C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CalorieTracker/Controllers/HomeController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11"
-            endingLineNumber = "11"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B985C8AF-E90E-491B-84B4-312890C6B8B8"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -190,8 +174,8 @@
             filePath = "CalorieTracker/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "signInUser(username:password:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -206,8 +190,8 @@
             filePath = "CalorieTracker/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
             landmarkName = "fetchUserData(forUsername:completion:)"
             landmarkType = "7">
             <Locations>
@@ -279,8 +263,8 @@
             filePath = "CalorieTracker/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "signInUser(username:password:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -343,8 +327,8 @@
             filePath = "CalorieTracker/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "signInUser(username:password:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -359,8 +343,8 @@
             filePath = "CalorieTracker/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "signInUser(username:password:completion:)"
             landmarkType = "7">
             <Locations>
@@ -407,8 +391,8 @@
             filePath = "CalorieTracker/UserInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "isFirstTimeLogging"
             landmarkType = "24">
          </BreakpointContent>
@@ -423,8 +407,8 @@
             filePath = "CalorieTracker/UserInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "isFirstTimeLogging"
             landmarkType = "24">
          </BreakpointContent>
@@ -439,8 +423,8 @@
             filePath = "CalorieTracker/UserInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "plan"
             landmarkType = "24">
          </BreakpointContent>
@@ -455,8 +439,8 @@
             filePath = "CalorieTracker/UserInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "plan"
             landmarkType = "24">
          </BreakpointContent>
@@ -471,8 +455,8 @@
             filePath = "CalorieTracker/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
             landmarkName = "changeValue(of:with:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -481,14 +465,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "1C409096-D432-4FB8-A61F-3E95EC605CDD"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieTracker/UserInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "plan"
             landmarkType = "24">
             <Locations>
@@ -537,6 +521,21 @@
                   endingLineNumber = "133"
                   offsetFromSymbolStart = "216">
                </Location>
+               <Location
+                  uuid = "1C409096-D432-4FB8-A61F-3E95EC605CDD - 5dd4f9d64da2471f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;(), Swift.Error&gt;) -&gt; () in CalorieTracker.UserInfo.plan.setter : Swift.Optional&lt;Swift.Int&gt;"
+                  moduleName = "CalorieTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/UserInfo.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "216">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -544,14 +543,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C62241E6-CC8F-4B8F-8FAA-CC744087D9A5"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieTracker/UserInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "plan"
             landmarkType = "24">
             <Locations>
@@ -600,6 +599,21 @@
                   endingLineNumber = "135"
                   offsetFromSymbolStart = "676">
                </Location>
+               <Location
+                  uuid = "C62241E6-CC8F-4B8F-8FAA-CC744087D9A5 - 5dd4f9d64da247dd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;(), Swift.Error&gt;) -&gt; () in CalorieTracker.UserInfo.plan.setter : Swift.Optional&lt;Swift.Int&gt;"
+                  moduleName = "CalorieTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/UserInfo.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "136"
+                  endingLineNumber = "136"
+                  offsetFromSymbolStart = "676">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -613,8 +627,8 @@
             filePath = "CalorieTracker/UserInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "isFirstTimeLogging"
             landmarkType = "24">
             <Locations>
@@ -663,6 +677,21 @@
                   endingLineNumber = "118"
                   offsetFromSymbolStart = "660">
                </Location>
+               <Location
+                  uuid = "0EA3D3AB-AA47-4827-8D64-E5D9FD866410 - 6ba94e7d4ed9953d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;(), Swift.Error&gt;) -&gt; () in CalorieTracker.UserInfo.isFirstTimeLogging.setter : Swift.Optional&lt;Swift.Bool&gt;"
+                  moduleName = "CalorieTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/UserInfo.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "660">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -676,8 +705,8 @@
             filePath = "CalorieTracker/UserInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "isFirstTimeLogging"
             landmarkType = "24">
             <Locations>
@@ -726,6 +755,21 @@
                   endingLineNumber = "116"
                   offsetFromSymbolStart = "192">
                </Location>
+               <Location
+                  uuid = "EDF34F7E-EF4D-486A-885A-4E3870D666C0 - 6ba94e7d4ed9957f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;(), Swift.Error&gt;) -&gt; () in CalorieTracker.UserInfo.isFirstTimeLogging.setter : Swift.Optional&lt;Swift.Bool&gt;"
+                  moduleName = "CalorieTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/UserInfo.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "192">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -739,8 +783,8 @@
             filePath = "CalorieTracker/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
             landmarkName = "changeValue(of:with:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -755,8 +799,8 @@
             filePath = "CalorieTracker/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
             landmarkName = "changeValue(of:with:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -771,8 +815,8 @@
             filePath = "CalorieTracker/UserInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "bmi"
             landmarkType = "24">
          </BreakpointContent>
@@ -781,7 +825,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "B99C1331-8B2B-42C1-94C9-63F0E971D4E3"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieTracker/Controllers/MyAccountController.swift"
@@ -797,62 +841,46 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "4F642CA4-7280-4BBB-8EFD-FF13358F0B97"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieTracker/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
             landmarkName = "fetchDiariesData(forUsername:date:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3CD47908-C187-4AB7-BB54-3C0E170FD745"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CalorieTracker/Controllers/HomeController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "setupUI()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "3CD47908-C187-4AB7-BB54-3C0E170FD745 - f6a89832bef14672"
+                  uuid = "4F642CA4-7280-4BBB-8EFD-FF13358F0B97 - d54ff098c5119d41"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "CalorieTracker.HomeController.setupUI() -&gt; ()"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CalorieTracker.FirebaseManager.fetchDiariesData(forUsername: Swift.String, date: Swift.String, completion: (Swift.Result&lt;(), Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "CalorieTracker"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/Controllers/HomeController.swift"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/FirebaseManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "3336">
+                  startingLineNumber = "235"
+                  endingLineNumber = "235"
+                  offsetFromSymbolStart = "3016">
                </Location>
                <Location
-                  uuid = "3CD47908-C187-4AB7-BB54-3C0E170FD745 - f6a89832bef14672"
+                  uuid = "4F642CA4-7280-4BBB-8EFD-FF13358F0B97 - d54ff098c5119b52"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "CalorieTracker.HomeController.setupUI() -&gt; ()"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CalorieTracker.FirebaseManager.fetchDiariesData(forUsername: Swift.String, date: Swift.String, completion: (Swift.Result&lt;(), Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "CalorieTracker"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/Controllers/HomeController.swift"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/FirebaseManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "3236">
+                  startingLineNumber = "282"
+                  endingLineNumber = "282"
+                  offsetFromSymbolStart = "3596">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -860,47 +888,271 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7D4AC02E-CE08-4810-9F1F-753B6A8438A2"
+            uuid = "BE04A745-7A58-451D-9CE3-3A3C139269C2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieTracker/FirebaseManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "addDiary(diaries1:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BE04A745-7A58-451D-9CE3-3A3C139269C2 - c1a78bd84b05894f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRDataSnapshot, Swift.Optional&lt;Swift.String&gt;) -&gt; () in CalorieTracker.FirebaseManager.addDiary(diaries: Swift.Dictionary&lt;Swift.String, Any&gt;, completion: (Swift.Result&lt;(), Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "CalorieTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/FirebaseManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "2236">
+               </Location>
+               <Location
+                  uuid = "BE04A745-7A58-451D-9CE3-3A3C139269C2 - 5739be6583d7305d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (__C.FIRDataSnapshot, Swift.Optional&lt;Swift.String&gt;) -&gt; () in CalorieTracker.FirebaseManager.addDiary(diaries: Swift.Dictionary&lt;Swift.String, Any&gt;, completion: (Swift.Result&lt;(), Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "CalorieTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/FirebaseManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "392">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3E861C0D-D9FF-4144-8201-7838D1D99310"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieTracker/FirebaseManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
+            landmarkName = "fetchDiariesData(forUsername:date:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3E861C0D-D9FF-4144-8201-7838D1D99310 - d54ff098c5119ae6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CalorieTracker.FirebaseManager.fetchDiariesData(forUsername: Swift.String, date: Swift.String, completion: (Swift.Result&lt;(), Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "CalorieTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/FirebaseManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "294"
+                  endingLineNumber = "294"
+                  offsetFromSymbolStart = "3132">
+               </Location>
+               <Location
+                  uuid = "3E861C0D-D9FF-4144-8201-7838D1D99310 - d81c5284c954202c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Swift.Result&lt;(), Swift.Error&gt;) -&gt; () in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CalorieTracker.FirebaseManager.fetchDiariesData(forUsername: Swift.String, date: Swift.String, completion: (Swift.Result&lt;(), Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "CalorieTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/FirebaseManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "294"
+                  endingLineNumber = "294"
+                  offsetFromSymbolStart = "92">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2F3FEBCF-105C-46F9-AB59-DA7E09936A5E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieTracker/FirebaseManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "297"
+            endingLineNumber = "297"
+            landmarkName = "fetchDiariesData(forUsername:date:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C64AFC1F-AB1C-4A00-8643-75CF48162901"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieTracker/DiariesManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "updateCaloriesAndFoods(with:parent:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C64AFC1F-AB1C-4A00-8643-75CF48162901 - 26b2ce991137c2f4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CalorieTracker.DiariesManager.updateCaloriesAndFoods(with: CalorieTracker.Food) -&gt; ()"
+                  moduleName = "CalorieTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/DiariesManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "2020">
+               </Location>
+               <Location
+                  uuid = "C64AFC1F-AB1C-4A00-8643-75CF48162901 - 91d2439365f9958"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Result&lt;(), Swift.Error&gt;) -&gt; () in CalorieTracker.DiariesManager.updateCaloriesAndFoods(with: CalorieTracker.Food) -&gt; ()"
+                  moduleName = "CalorieTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/DiariesManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5704FC49-7423-4134-9313-D0CDBAAAC63E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieTracker/DiariesManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "updateCaloriesAndFoods(with:parent:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5C673CDB-C130-47C1-855B-502C0A4B0604"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieTracker/Controllers/HomeController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "foodChange()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "42B1393B-8254-454E-8876-8A9AD144A94F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieTracker/DiariesManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ED2553FE-5AA5-4DE0-82FC-B7DC75F7DC93"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalorieTracker/DiariesManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "updateCaloriesAndFoods(with:parent:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A71C1D85-3391-4C02-9BDF-87025669819E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalorieTracker/Controllers/HomeController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "setupUI()"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "foodChange()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "7D4AC02E-CE08-4810-9F1F-753B6A8438A2 - f6a89832bef14613"
+                  uuid = "A71C1D85-3391-4C02-9BDF-87025669819E - fe2f3ee5e2e6e28f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "CalorieTracker.HomeController.setupUI() -&gt; ()"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in CalorieTracker.HomeController.foodChange() -&gt; ()"
                   moduleName = "CalorieTracker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/Controllers/HomeController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "3888">
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "3192">
                </Location>
                <Location
-                  uuid = "7D4AC02E-CE08-4810-9F1F-753B6A8438A2 - f6a89832bef14613"
+                  uuid = "A71C1D85-3391-4C02-9BDF-87025669819E - fe2f3ee5e2e6e28f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "CalorieTracker.HomeController.setupUI() -&gt; ()"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in CalorieTracker.HomeController.foodChange() -&gt; ()"
                   moduleName = "CalorieTracker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/andjelamircetic/Desktop/CalorieTracker/CalorieTracker/Controllers/HomeController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "3708">
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "2724">
                </Location>
             </Locations>
          </BreakpointContent>

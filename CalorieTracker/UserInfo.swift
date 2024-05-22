@@ -16,13 +16,14 @@ class UserInfo {
     var caloriesNeeded = 0.0
     
     private init() {
-        caloriesNeeded = calculateCalories(weight: weight ?? 0, height: height ?? 0, goal: plan ?? 0)
+        
     }
     
     func setUserData(ud: [String: Any]?){
         self.userData = ud
         currentWeight = userData?["currentWeight"] as? Double
         bmi = userData?["bmi"] as? Double
+        caloriesNeeded = calculateCalories(weight: weight ?? 0, height: height ?? 0, goal: plan ?? 0)
     }
     
     var username: String? {

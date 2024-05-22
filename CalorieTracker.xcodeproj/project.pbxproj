@@ -39,6 +39,12 @@
 		9E8401022BFA182100D1F62F /* HalfSizePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8401012BFA182100D1F62F /* HalfSizePresentationController.swift */; };
 		9E8401042BFA308000D1F62F /* carrot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E8401032BFA308000D1F62F /* carrot.jpg */; };
 		9E8401062BFB65E300D1F62F /* DiariesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8401052BFB65E300D1F62F /* DiariesManager.swift */; };
+		9E8D2B022BFD098D00B0800B /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8D2B012BFD098D00B0800B /* Food.swift */; };
+		9E8D2B042BFD09D800B0800B /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8D2B032BFD09D800B0800B /* FoodViewController.swift */; };
+		9E8D2B072BFD0A3D00B0800B /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8D2B052BFD0A3D00B0800B /* FoodCell.swift */; };
+		9E8D2B082BFD0A3D00B0800B /* FoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8D2B062BFD0A3D00B0800B /* FoodCell.xib */; };
+		9E8D2B0A2BFD194600B0800B /* p1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E8D2B092BFD194600B0800B /* p1.jpg */; };
+		9E8D2B0C2BFD1A2000B0800B /* p2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E8D2B0B2BFD1A2000B0800B /* p2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +98,12 @@
 		9E8401012BFA182100D1F62F /* HalfSizePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfSizePresentationController.swift; sourceTree = "<group>"; };
 		9E8401032BFA308000D1F62F /* carrot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = carrot.jpg; sourceTree = "<group>"; };
 		9E8401052BFB65E300D1F62F /* DiariesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiariesManager.swift; sourceTree = "<group>"; };
+		9E8D2B012BFD098D00B0800B /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		9E8D2B032BFD09D800B0800B /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
+		9E8D2B052BFD0A3D00B0800B /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
+		9E8D2B062BFD0A3D00B0800B /* FoodCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCell.xib; sourceTree = "<group>"; };
+		9E8D2B092BFD194600B0800B /* p1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p1.jpg; sourceTree = "<group>"; };
+		9E8D2B0B2BFD1A2000B0800B /* p2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +165,9 @@
 				9E067FDC2BF4945300CFA8DB /* UserInfo.swift */,
 				9E067FE02BF49F5D00CFA8DB /* FirebaseManager.swift */,
 				9E8401052BFB65E300D1F62F /* DiariesManager.swift */,
+				9E8D2B012BFD098D00B0800B /* Food.swift */,
+				9E8D2B052BFD0A3D00B0800B /* FoodCell.swift */,
+				9E8D2B062BFD0A3D00B0800B /* FoodCell.xib */,
 			);
 			path = CalorieTracker;
 			sourceTree = "<group>";
@@ -187,6 +202,7 @@
 				9E8400F92BF965EB00D1F62F /* DatePickerViewController.swift */,
 				9E8400FB2BF969F800D1F62F /* ArrowProgressView.swift */,
 				9E8401012BFA182100D1F62F /* HalfSizePresentationController.swift */,
+				9E8D2B032BFD09D800B0800B /* FoodViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -209,6 +225,8 @@
 				9E067FA22BDFF62600CFA8DB /* Assets.xcassets */,
 				9E8400FF2BF9FA0400D1F62F /* food1.png */,
 				9E8401032BFA308000D1F62F /* carrot.jpg */,
+				9E8D2B0B2BFD1A2000B0800B /* p2.png */,
+				9E8D2B092BFD194600B0800B /* p1.jpg */,
 				9E8400FD2BF9728200D1F62F /* food.jpg */,
 				9E8400F22BF6B2BE00D1F62F /* normal.png */,
 				9E8400F02BF6B2B500D1F62F /* fit.png */,
@@ -329,6 +347,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E8D2B0A2BFD194600B0800B /* p1.jpg in Resources */,
 				9E067FA62BDFF62600CFA8DB /* LaunchScreen.storyboard in Resources */,
 				9E8400EF2BF6A74800D1F62F /* signin.png in Resources */,
 				9E8400F12BF6B2B500D1F62F /* fit.png in Resources */,
@@ -337,7 +356,9 @@
 				9E067FD52BF2204E00CFA8DB /* GoogleService-Info.plist in Resources */,
 				9E8400FE2BF9728200D1F62F /* food.jpg in Resources */,
 				9E8400ED2BF6A03300D1F62F /* view1.png in Resources */,
+				9E8D2B0C2BFD1A2000B0800B /* p2.png in Resources */,
 				9E067FA32BDFF62600CFA8DB /* Assets.xcassets in Resources */,
+				9E8D2B082BFD0A3D00B0800B /* FoodCell.xib in Resources */,
 				9E8400F32BF6B2BE00D1F62F /* normal.png in Resources */,
 				9E067FA12BDFF62400CFA8DB /* Main.storyboard in Resources */,
 			);
@@ -366,10 +387,12 @@
 			files = (
 				9E067FE12BF49F5D00CFA8DB /* FirebaseManager.swift in Sources */,
 				9E067F9E2BDFF62400CFA8DB /* ViewController.swift in Sources */,
+				9E8D2B042BFD09D800B0800B /* FoodViewController.swift in Sources */,
 				9E067FDB2BF3F52A00CFA8DB /* TabBarController.swift in Sources */,
 				9E067FD92BF3F4CF00CFA8DB /* MyAccountController.swift in Sources */,
 				9E067FD32BF21B4000CFA8DB /* DashboardVC.swift in Sources */,
 				9E8401062BFB65E300D1F62F /* DiariesManager.swift in Sources */,
+				9E8D2B072BFD0A3D00B0800B /* FoodCell.swift in Sources */,
 				9E8401022BFA182100D1F62F /* HalfSizePresentationController.swift in Sources */,
 				9E067FD72BF3F49300CFA8DB /* HomeController.swift in Sources */,
 				9E067F9A2BDFF62400CFA8DB /* AppDelegate.swift in Sources */,
@@ -377,6 +400,7 @@
 				9E8400FA2BF965EB00D1F62F /* DatePickerViewController.swift in Sources */,
 				9E8400F62BF8DBBE00D1F62F /* WeightPickVC.swift in Sources */,
 				9E067FDD2BF4945300CFA8DB /* UserInfo.swift in Sources */,
+				9E8D2B022BFD098D00B0800B /* Food.swift in Sources */,
 				9E8400FC2BF969F800D1F62F /* ArrowProgressView.swift in Sources */,
 				9E067F9C2BDFF62400CFA8DB /* SceneDelegate.swift in Sources */,
 			);

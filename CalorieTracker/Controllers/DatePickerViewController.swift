@@ -85,6 +85,7 @@ class DatePickerViewController: UIViewController {
 
 extension Notification.Name {
     static let myCustomNotification = Notification.Name("myCustomNotification")
+    static let foodAdded = Notification.Name("foodAdded")
 }
 
 
