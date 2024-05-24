@@ -10,7 +10,7 @@ import UIKit
 class FoodViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     private var collectionView: UICollectionView!
-    private var foods: [Food] = []
+    private var foods: [Food] = FirebaseManager.shared.allFood
     private var closeButton: UIButton!
     var parentController: UIViewController?
 
@@ -19,7 +19,7 @@ class FoodViewController: UIViewController, UICollectionViewDataSource, UICollec
         view.backgroundColor = UIColor(hex: "2D2D2D")
         setupCloseButton()
         setupCollectionView()
-        loadFoodData()
+       // loadFoodData()
     }
     
     private func setupCollectionView() {
@@ -68,44 +68,44 @@ class FoodViewController: UIViewController, UICollectionViewDataSource, UICollec
         dismiss(animated: true, completion: nil)
     }
     
-    private func loadFoodData() {
-        guard let url = URL(string: "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/food.json") else {
-                   print("Invalid URL")
-                   return
-               }
-               
-               var request = URLRequest(url: url)
-               request.httpMethod = "GET"
-               
-               let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
-                   guard let self = self else { return }
-                   
-                   if let error = error {
-                       print("Error: \(error)")
-                       return
-                   }
-                   
-                   guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                       print("Invalid response")
-                       return
-                   }
-                   
-                   if let data = data {
-                       do {
-                           let foodData = try JSONDecoder().decode(FoodData.self, from: data)
-                           self.foods = Array(foodData.food.values)
-                           
-                           DispatchQueue.main.async {
-                               self.collectionView.reloadData()
-                           }
-                       } catch {
-                           print("Error decoding JSON: \(error)")
-                       }
-                   }
-               }
-               
-               task.resume()
-    }
+//    private func loadFoodData() {
+//        guard let url = URL(string: "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/food.json") else {
+//                   print("Invalid URL")
+//                   return
+//               }
+//               
+//               var request = URLRequest(url: url)
+//               request.httpMethod = "GET"
+//               
+//               let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+//                   guard let self = self else { return }
+//                   
+//                   if let error = error {
+//                       print("Error: \(error)")
+//                       return
+//                   }
+//                   
+//                   guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+//                       print("Invalid response")
+//                       return
+//                   }
+//                   
+//                   if let data = data {
+//                       do {
+//                           let foodData = try JSONDecoder().decode(FoodData.self, from: data)
+//                           self.foods = Array(foodData.food.values)
+//                           
+//                           DispatchQueue.main.async {
+//                               self.collectionView.reloadData()
+//                           }
+//                       } catch {
+//                           print("Error decoding JSON: \(error)")
+//                       }
+//                   }
+//               }
+//               
+//               task.resume()
+//    }
 
 
     // MARK: - UICollectionViewDataSource
@@ -123,7 +123,7 @@ class FoodViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedFood = foods[indexPath.item]
-        DiariesManager.shared.updateCaloriesAndFoods(with: selectedFood, parent: self.parentController ?? nil)
+        DiariesManager.shared.updateCaloriesAndFoods2(with: selectedFood, parent: self.parentController ?? nil)
     }
 }
 

@@ -7,8 +7,9 @@
 
 import UIKit
 
-class HomeController: UIViewController {
+class HomeController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    private var foods: [Food] = FirebaseManager.shared.eatenFood
     @IBOutlet weak var questionLbl: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var tipView: UIView!
@@ -18,11 +19,19 @@ class HomeController: UIViewController {
     @IBOutlet weak var txtLbl: UITextView!
     @IBOutlet weak var youCanStillEatLabel: UILabel!
     
+    @IBOutlet weak var foodLabel1: UILabel!
+    private var foodLabel = UILabel()
+    private var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //setupUI()
+        getFood()
+        setupCollectionView()
         setupUI()
         NotificationCenter.default.addObserver(self, selector: #selector(handleCustomNotification(_:)), name: .myCustomNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleFoodNotification(_:)), name: .foodAdded, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +45,29 @@ class HomeController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .foodAdded, object: nil)
     }
     
+    func setupCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.itemSize = CGSize(width: view.frame.width - 50, height: 80)
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .black
+        collectionView.dataSource = self
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
+        let nib = UINib(nibName: "FoodCell", bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: "FoodCell")
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        view.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: foodLabel1.bottomAnchor, constant: 10),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+    }
     
     func setupUI() {
         tipView.layer.cornerRadius = 10
@@ -50,14 +82,33 @@ class HomeController: UIViewController {
         let path = UIBezierPath(roundedRect: tipView.bounds, cornerRadius: 10)
         shapeLayer.path = path.cgPath
         
-        setupPlusButton()
         tipView.layer.addSublayer(shapeLayer)
         view.bringSubviewToFront(tipView)
         tipView.bringSubviewToFront(tipLabel)
         tipView.bringSubviewToFront(txtLbl)
         tipView.bringSubviewToFront(questionLbl)
         
+        foodLabel.text = "Food you ate:"
+        foodLabel.textColor = .white
+        foodLabel.font = UIFont.systemFont(ofSize: 25)
+        foodLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         foodChange()
+        setupPlusButton()
+    }
+    
+    func getFood() {
+        foodLabel1.isHidden = false
+        FirebaseManager.shared.eatenFood = []
+        for food in FirebaseManager.shared.allFood {
+            if let eaten = DiariesManager.shared.foods {
+                if(eaten[food.name] != nil) {
+                    FirebaseManager.shared.eatenFood.append(food)
+                }
+            }
+        }
+        foods = FirebaseManager.shared.eatenFood
+        if(foods.isEmpty) {foodLabel1.isHidden = true}
     }
     
     func setupPlusButton() {
@@ -100,7 +151,7 @@ class HomeController: UIViewController {
     @objc private func handleCustomNotification(_ notification: Notification) {
         if let userInfo = notification.userInfo, let date = userInfo["date"] as? String {
             FirebaseManager.shared.fetchDiariesData(forUsername: UserInfo.shared.username!, date: date, completion: { _ in
-              
+                
                 self.foodChange()
             })
         }
@@ -112,7 +163,6 @@ class HomeController: UIViewController {
             foodChange()
         }
         
-        // collectionView.reloadData() if necessary
     }
     
     public func foodChange() {
@@ -122,6 +172,9 @@ class HomeController: UIViewController {
             self.youCanStillEatLabel.text = "You can still eat \(String(format: "%.1f", Double(DiariesManager.shared.caloriesLeft ?? 0))) calories"
             self.progressBar.setProgress(Float(Double(DiariesManager.shared.caloriesEaten ?? 0) / Double(DiariesManager.shared.goalCalories ?? 1)), animated: true)
             self.progressBar.progressTintColor = .systemYellow
+            
+            self.getFood()
+            self.collectionView.reloadData()
         }
     }
     
@@ -135,6 +188,18 @@ class HomeController: UIViewController {
         foodVC.modalPresentationStyle = .popover
         foodVC.parentController = self
         present(foodVC, animated: true, completion: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return foods.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCell", for: indexPath) as! FoodCell
+        let food = foods[indexPath.item]
+        cell.configure(with: food)
+        return cell
+        
     }
     
 }

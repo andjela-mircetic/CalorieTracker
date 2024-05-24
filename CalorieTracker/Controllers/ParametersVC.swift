@@ -46,6 +46,44 @@ class ParametersVC: UIViewController {
         weigthLabel.isHidden = !isRegister
         register.isHidden = !isRegister
         signIn.isHidden = isRegister
+        password.isSecureTextEntry = true
+        
+        weigth.backgroundColor = UIColor.black//.withAlphaComponent(0.5)
+        weigth.borderStyle = .none
+        weigth.layer.cornerRadius = 0
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0.0, y: weigth.frame.height - 1, width: weigth.frame.width, height: 1.0)
+        bottomLine.backgroundColor = UIColor.white.cgColor
+        weigth.layer.addSublayer(bottomLine)
+        weigth.textColor = .white
+        
+        height.backgroundColor = UIColor.black//.withAlphaComponent(0.5)
+        height.borderStyle = .none
+        height.layer.cornerRadius = 0
+        let bottomLine2 = CALayer()
+        bottomLine2.frame = CGRect(x: 0.0, y: height.frame.height - 1, width: height.frame.width, height: 1.0)
+        bottomLine2.backgroundColor = UIColor.white.cgColor
+        height.layer.addSublayer(bottomLine2)
+        height.textColor = .white
+        
+        username.backgroundColor = UIColor.black//.withAlphaComponent(0.5)
+        username.borderStyle = .none
+        username.layer.cornerRadius = 0
+        let bottomLine3 = CALayer()
+        bottomLine3.frame = CGRect(x: 0.0, y: username.frame.height - 1, width: username.frame.width, height: 1.0)
+        bottomLine3.backgroundColor = UIColor.white.cgColor
+        username.layer.addSublayer(bottomLine3)
+        username.textColor = .white
+        
+        password.backgroundColor = UIColor.black//.withAlphaComponent(0.5)
+        password.borderStyle = .none
+        password.layer.cornerRadius = 0
+        let bottomLine4 = CALayer()
+        bottomLine4.frame = CGRect(x: 0.0, y: password.frame.height - 1, width: password.frame.width, height: 1.0)
+        bottomLine4.backgroundColor = UIColor.white.cgColor
+        password.layer.addSublayer(bottomLine4)
+        password.textColor = .white
+        
     }
     
     
@@ -60,7 +98,7 @@ class ParametersVC: UIViewController {
             return
         }
         
-        FirebaseManager.shared.registerUser(username: username, password: password, height: height, weight: weight) { 
+        FirebaseManager.shared.registerUser(username: username, password: password, height: height, weight: weight) {
             result in
             switch result {
             case .success:

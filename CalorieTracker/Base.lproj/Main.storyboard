@@ -372,12 +372,20 @@
                                 <color key="backgroundColor" systemColor="systemBrownColor"/>
                                 <color key="tintColor" systemColor="separatorColor"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Food you ate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtt-FL-7OJ">
+                                <rect key="frame" x="45" y="410" width="255" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lru-Sk-VZv"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <connections>
                         <outlet property="caloriesEatenLabel" destination="TDz-BS-jDX" id="hhZ-zk-mwm"/>
+                        <outlet property="foodLabel1" destination="vtt-FL-7OJ" id="i4f-E5-yZr"/>
                         <outlet property="goalLabel" destination="7Wl-Yp-B11" id="8bM-ar-Rt3"/>
                         <outlet property="progressBar" destination="WWV-J6-nP1" id="uPU-6p-5JN"/>
                         <outlet property="questionLbl" destination="vF0-rL-2Um" id="3kJ-gF-FvF"/>

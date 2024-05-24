@@ -17,13 +17,12 @@ class WeightPickVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupWeights()
         setupUI()
     }
     
     private func setupWeights() {
-        for weight in stride(from: 45.0, to: 120.5, by: 0.5) {
+        for weight in stride(from: 25.0, to: 120.5, by: 0.5) {
             weights.append(String(format: "%.1f kg", weight))
         }
     }

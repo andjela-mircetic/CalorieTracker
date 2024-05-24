@@ -13,6 +13,8 @@ import Firebase
 class FirebaseManager {
     
     static let shared = FirebaseManager()
+    public var allFood: [Food] = []
+    public var eatenFood: [Food] = []
     
     private init() {}
     
@@ -112,7 +114,6 @@ class FirebaseManager {
             
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let httpResponse = response as? HTTPURLResponse else {
-
                     print("Invalid server response")
                     completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid server response"])))
                     return
@@ -170,19 +171,21 @@ class FirebaseManager {
     
                             self.fetchDiariesData(forUsername: username, date: dateString) { result in
                                 switch result {
-                                case .success(): group.leave()
+                                case .success():  
+                                    self.loadFoodData2 {
+                                    group.leave()
+                                }
                                 case .failure(let error):
                                     print("Error: \(error.localizedDescription)")
                                     group.leave()
                                 } }
-                           // group.leave()
+                          
                         case .failure(let error):
                             print("Error: \(error.localizedDescription)")
-                            //return
                             group.leave()
                         }
                     }
-                   // return
+                  
                     break
                 }
             }
@@ -190,6 +193,7 @@ class FirebaseManager {
             group.notify(queue: .main) {
                 if userFound {
                     print("User authenticated successfully!")
+                    
                     completion(.success(()))
                 } else {
                     print("Invalid username or password")
@@ -438,5 +442,51 @@ class FirebaseManager {
             }
         }.resume()
     }
+    
+    private func loadFoodData2(completion: @escaping () -> Void) {
+        guard let url = URL(string: "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/food.json") else {
+                   print("Invalid URL")
+                   return
+               }
+               
+               var request = URLRequest(url: url)
+               request.httpMethod = "GET"
+               
+               let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+                   guard let self = self else { return }
+                   
+                   if let error = error {
+                       print("Error: \(error)")
+                       completion()
+                       return
+                   }
+                   
+                   guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                       print("Invalid response")
+                       completion()
+                       return
+                   }
+                   
+                   if let data = data {
+                       do {
+                           let foodData = try JSONDecoder().decode(FoodData.self, from: data)
+                           self.allFood = Array(foodData.food.values)
+//                           for food in allFood {
+//                               if(DiariesManager.shared.foods![food.name] != nil) {
+//                                   eatenFood.append(food)
+//                               }
+//                           }
+                         print("LOADED")
+                           completion()
+                       } catch {
+                           print("Error decoding JSON: \(error)")
+                           completion()
+                       }
+                   }
+               }
+               
+               task.resume()
+    }
+
 
 }

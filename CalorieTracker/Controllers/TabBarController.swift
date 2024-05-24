@@ -18,6 +18,7 @@ class TabBarController: UITabBarController {
         
         self.tabBar.tintColor = .systemGreen
         self.tabBar.unselectedItemTintColor = .systemGray
+        self.tabBar.isTranslucent = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleCustomNotification(_:)), name: .myCustomNotification, object: nil)
     }

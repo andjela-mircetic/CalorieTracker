@@ -21,7 +21,6 @@ class DiariesManager {
     
     func setDiaries(ud: [String: Any]?){
         self.diaries = ud
-       
     }
     
     var user: String? {
@@ -48,7 +47,77 @@ class DiariesManager {
         return diaries?["foods"] as? [String: Any]
     }
     
-    func updateCaloriesAndFoods(with food: Food, parent: UIViewController?) {
+//    func updateCaloriesAndFoods(with food: Food, parent: UIViewController?) {
+//        var updatedCaloriesEaten = caloriesEaten
+//        var updatedCaloriesLeft = caloriesLeft
+//        var updatedFoods = foods
+//        var isPost = false
+//        if updatedFoods == nil {
+//            isPost = true
+//            updatedFoods = [:]
+//        }
+//        
+//        updatedCaloriesEaten! += food.calories
+//        updatedCaloriesLeft = (goalCalories ?? 0) - updatedCaloriesEaten!
+//        if var foodCount = updatedFoods![food.name] as? Int {
+//            foodCount += 1
+//            updatedFoods![food.name] = foodCount
+//        } else {
+//            updatedFoods![food.name] = 1
+//        }
+//        
+//        diaries?["caloriesEaten"] = updatedCaloriesEaten
+//        diaries?["caloriesLeft"] = updatedCaloriesLeft
+//        diaries?["foods"] = updatedFoods
+//        
+//        let dispatchGroup = DispatchGroup()
+//        
+//        dispatchGroup.enter()
+//        FirebaseManager.shared.changeValueDiary(of: "caloriesEaten", with: updatedCaloriesEaten, isPost: false) { result in
+//            switch result {
+//            case .success():
+//                print("foods \(String(describing: self.caloriesEaten))")
+//            case .failure(let error):
+//                print("Error updating calorieseaten: \(error)")
+//            }
+//            dispatchGroup.leave()
+//        }
+//        
+//        dispatchGroup.enter()
+//        dispatchGroup.notify(queue: .main) {
+//            FirebaseManager.shared.changeValueDiary(of: "caloriesLeft", with: updatedCaloriesLeft, isPost: false) { result in
+//                switch result {
+//                case .success():
+//                    print("foods \(String(describing: self.caloriesLeft))")
+//                case .failure(let error):
+//                    print("Error updating caloriesleft: \(error)")
+//                }
+//                dispatchGroup.leave()
+//            }
+//        }
+//        
+//        dispatchGroup.enter()
+//        dispatchGroup.notify(queue: .main) {
+//            FirebaseManager.shared.changeValueDiary(of: "foods", with: updatedFoods, isPost: isPost) { result in
+//                switch result {
+//                case .success():
+//                    print("foods \(String(describing: self.foods))")
+//                case .failure(let error):
+//                    print("Error updating foods: \(error)")
+//                }
+//                dispatchGroup.leave()
+//            }
+//        }
+//        
+//        dispatchGroup.notify(queue: .main) {
+//            NotificationCenter.default.post(name: .foodAdded, object: nil, userInfo: ["food": food])
+//            if let parent = parent as? HomeController {
+//                parent.foodChange()
+//            }
+//        }
+//    }
+    
+    func updateCaloriesAndFoods2(with food: Food, parent: UIViewController?) {
         var updatedCaloriesEaten = caloriesEaten
         var updatedCaloriesLeft = caloriesLeft
         var updatedFoods = foods
@@ -70,24 +139,34 @@ class DiariesManager {
         diaries?["caloriesEaten"] = updatedCaloriesEaten
         diaries?["caloriesLeft"] = updatedCaloriesLeft
         diaries?["foods"] = updatedFoods
-       
         
-        //firebase do smt
-        
-        FirebaseManager.shared.changeValueDiary(of: "caloriesEaten", with: updatedCaloriesEaten, isPost: false, completion: { _ in
-            // print("calorieseaten success")
-        })
-        FirebaseManager.shared.changeValueDiary(of: "caloriesLeft", with: updatedCaloriesLeft, isPost: false, completion: { _ in
-            print("caloriesleft \(self.caloriesLeft)")
-        })
-        FirebaseManager.shared.changeValueDiary(of: "foods", with: updatedFoods, isPost: isPost, completion: { _ in
-            print("foods \(self.foods)")
-        })
-        
-        //post notif
-        NotificationCenter.default.post(name: .foodAdded, object: nil, userInfo: ["food": food])
-        if let parent1 = parent as? HomeController {
-            parent1.foodChange()
+        FirebaseManager.shared.changeValueDiary(of: "caloriesEaten", with: updatedCaloriesEaten, isPost: false) { result in
+            switch result {
+            case .success():
+                print("Updated caloriesEaten: \(String(describing: self.caloriesEaten))")
+                FirebaseManager.shared.changeValueDiary(of: "caloriesLeft", with: updatedCaloriesLeft, isPost: false) { result in
+                    switch result {
+                    case .success():
+                        print("Updated caloriesLeft: \(String(describing: self.caloriesLeft))")
+                        FirebaseManager.shared.changeValueDiary(of: "foods", with: updatedFoods, isPost: isPost) { result in
+                            switch result {
+                            case .success():
+                                print("Updated foods: \(String(describing: self.foods))")
+                                NotificationCenter.default.post(name: .foodAdded, object: nil, userInfo: ["food": food])
+                                if let parent = parent as? HomeController {
+                                    parent.foodChange()
+                                }
+                            case .failure(let error):
+                                print("Error updating foods: \(error)")
+                            }
+                        }
+                    case .failure(let error):
+                        print("Error updating caloriesLeft: \(error)")
+                    }
+                }
+            case .failure(let error):
+                print("Error updating caloriesEaten: \(error)")
+            }
         }
     }
 }
