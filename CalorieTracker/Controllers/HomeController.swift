@@ -20,7 +20,6 @@ class HomeController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var youCanStillEatLabel: UILabel!
     
     @IBOutlet weak var foodLabel1: UILabel!
-    private var foodLabel = UILabel()
     private var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -87,11 +86,6 @@ class HomeController: UIViewController, UICollectionViewDataSource, UICollection
         tipView.bringSubviewToFront(tipLabel)
         tipView.bringSubviewToFront(txtLbl)
         tipView.bringSubviewToFront(questionLbl)
-        
-        foodLabel.text = "Food you ate:"
-        foodLabel.textColor = .white
-        foodLabel.font = UIFont.systemFont(ofSize: 25)
-        foodLabel.translatesAutoresizingMaskIntoConstraints = false
         
         foodChange()
         setupPlusButton()
