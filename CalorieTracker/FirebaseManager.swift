@@ -7,14 +7,14 @@
 
 import Foundation
 import Firebase
-
-//cmd=option=let arrow za collapse
+import FirebaseAuth
 
 class FirebaseManager {
     
     static let shared = FirebaseManager()
     public var allFood: [Food] = []
     public var eatenFood: [Food] = []
+    private var myToken = ""
     
     private init() {}
     
@@ -26,80 +26,98 @@ class FirebaseManager {
     
     func registerUser(username: String, password: String, height: String, weight: String, completion: @escaping (Result<Void, Error>) -> Void) {
         
-        let userData: [String: Any] = [
-            "username": username,
-            "password": password,
-            "height": Int(height) ?? 0,
-            "weight": Int(weight) ?? 0,
-            "currentWeight": Double(weight) ?? 0,
-            "goalWeight": 0,
-            "bmi": calculateBMI(weight: Double(weight)!, height: Double(height)!),
-            "isFirstTimeLogging": true,
-            "plan": 1
-        ]
-        
-        let usersRef = Database.database().reference().child("users")
-        usersRef.observeSingleEvent(of: .value) { snapshot, _ in
-            guard let users = snapshot.value as? [String: [String: Any]] else {
-                completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve user data"])))
-                return
-            }
-            
-            for (_, userData) in users {
-                if let storedUsername = userData["username"] as? String, storedUsername == username {
+        Auth.auth().createUser(withEmail: username, password: password) { authResult, error in
+            if let error = error {
+                completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error creating auth user"])))
+            } else {
                 
-                    completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "User with the same username already exists"])))
-                    return
-                }
-            }
-            
-            guard let jsonData = try? JSONSerialization.data(withJSONObject: userData) else {
-                print("Error serializing user data to JSON")
-                completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error serializing user data to JSON"])))
-                return
-            }
-            
-            let endpoint = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/users.json"
-            var request = URLRequest(url: URL(string: endpoint)!)
-            request.httpMethod = "POST"
-            request.httpBody = jsonData
-            
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let httpResponse = response as? HTTPURLResponse else {
-
-                    print("Invalid server response")
-                    completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid server response"])))
-                    return
-                }
+            let userData: [String: Any] = [
+                    "username": username,
+                    "password": password,
+                    "height": Int(height) ?? 0,
+                    "weight": Int(weight) ?? 0,
+                    "currentWeight": Double(weight) ?? 0,
+                    "goalWeight": 0,
+                    "bmi": self.calculateBMI(weight: Double(weight)!, height: Double(height)!),
+                    "isFirstTimeLogging": true,
+                    "plan": 1
+                ]
                 
-                if (200...299).contains(httpResponse.statusCode) {
-                    print("User registered successfully!")
-                    DispatchQueue.main.async {
-                        completion(.success(()))
+                let usersRef = Database.database().reference().child("users")
+                usersRef.observeSingleEvent(of: .value) { snapshot, _ in
+                    guard let users = snapshot.value as? [String: [String: Any]] else {
+                        completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve user data"])))
+                        return
                     }
-                } else {
-                    print("Error registering user: \(httpResponse.statusCode)")
-                    if let responseData = data,
-                       let errorResponse = String(data: responseData, encoding: .utf8) {
-                        print("Error response: \(errorResponse)")
+                    
+                    for (_, userData) in users {
+                        if let storedUsername = userData["username"] as? String, storedUsername == username {
+                            
+                            completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "User with the same username already exists"])))
+                            return
+                        }
                     }
-                    completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error registering user"])))
-                    return
+                    
+                    guard let jsonData = try? JSONSerialization.data(withJSONObject: userData) else {
+                        print("Error serializing user data to JSON")
+                        completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error serializing user data to JSON"])))
+                        return
+                    }
+                    
+                    authResult?.user.getIDToken { token, error in
+                        if let error = error {
+                            completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error getting ID token: \(error.localizedDescription)"])))
+                            return
+                        }
+                        
+                        guard let token = token else {
+                            completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to get ID token"])))
+                            return
+                        }
+                        
+                        self.myToken = token
+                        //if let token = authResult?.user.getIDToken() {
+                        let endpoint = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=\(token)"
+                        var request = URLRequest(url: URL(string: endpoint)!)
+                        request.httpMethod = "POST"
+                        request.httpBody = jsonData
+                       // request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                        
+                        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                            guard let httpResponse = response as? HTTPURLResponse else {
+                                
+                                print("Invalid server response")
+                                completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid server response"])))
+                                return
+                            }
+                            
+                            if (200...299).contains(httpResponse.statusCode) {
+                                print("User registered successfully!")
+                                DispatchQueue.main.async {
+                                    completion(.success(()))
+                                }
+                            } else {
+                                print("Error registering user: \(httpResponse.statusCode)")
+                                if let responseData = data,
+                                   let errorResponse = String(data: responseData, encoding: .utf8) {
+                                    print("Error response: \(errorResponse)")
+                                }
+                                completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error registering user"])))
+                                return
+                            }
+                        }
+                    task.resume()
+                    }
                 }
             }
-            task.resume()
         }
-        
     }
     
     func addDiary(diaries1: [String: Any], completion: @escaping (Result<Void, Error>) -> Void) {
         
         let diariesRef = Database.database().reference().child("diaries")
         diariesRef.observeSingleEvent(of: .value) { snapshot, _ in
-//            guard let diaries = snapshot.value as? [String: [String: Any]] else {
-//                completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve diaries"])))
-//                return
-//            }
+
             
             guard let jsonData = try? JSONSerialization.data(withJSONObject: diaries1) else {
                 print("Error serializing diaries data to JSON")
@@ -107,7 +125,7 @@ class FirebaseManager {
                 return
             }
             
-            let endpoint = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/diaries.json"
+            let endpoint = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/diaries.json?auth=\(self.myToken)"
             var request = URLRequest(url: URL(string: endpoint)!)
             request.httpMethod = "POST"
             request.httpBody = jsonData
@@ -140,72 +158,113 @@ class FirebaseManager {
         
     func signInUser(username: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
         
-        let group = DispatchGroup()
-        var userFound = false
-        
-        let usersRef = Database.database().reference().child("users")
-        usersRef.observeSingleEvent(of: .value) { (snapshot) in
-            guard let users = snapshot.value as? [String: [String: Any]] else {
-                
-                print("failed to retrieve data")
-                print("Snapshot value:", snapshot.value ?? "nil")
+        Auth.auth().signIn(withEmail: username, password: password) { authResult, error in
+            if let error = error {
+                print("Authentication error: \(error.localizedDescription)")
+                completion(.failure(NSError(domain: "SignInError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid username or password"])))
                 return
             }
             
-            for (_, userData) in users {
-                if let storedUsername = userData["username"] as? String,
-                   let storedPassword = userData["password"] as? String,
-                   storedUsername == username && storedPassword == password {
-                    userFound = true
-                                   
-                    group.enter()
+            var userFound = false
+           // let group = DispatchGroup()
+            
+            let usersRef = Database.database().reference().child("users")
+            usersRef.observeSingleEvent(of: .value) { (snapshot) in
+                guard let users = snapshot.value as? [String: [String: Any]] else {
                     
-                    self.fetchUserData(forUsername: username) { result in
-                        switch result {
-                        case .success():
-                           // return
-                            let today = Date()
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "yyyy-MM-dd"
-                            let dateString = dateFormatter.string(from: Date())
-    
-                            self.fetchDiariesData(forUsername: username, date: dateString) { result in
+                    print("failed to retrieve data")
+                    print("Snapshot value:", snapshot.value ?? "nil")
+                    completion(.failure(NSError(domain: "SignInError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve user data"])))
+                    
+                    return
+                }
+               
+                for (_, userData) in users {
+                    if let storedUsername = userData["username"] as? String,
+                       let storedPassword = userData["password"] as? String,
+                       storedUsername == username && storedPassword == password {
+                       userFound = true
+                        
+                        authResult?.user.getIDToken { token, error in
+                            if let error = error {
+                                completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error getting ID token: \(error.localizedDescription)"])))
+                                //group.leave()
+                                completion(.failure(NSError(domain: "SignInError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve user data"])))
+                                   
+                                return
+                            }
+                            
+                            guard let token = token else {
+                                completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to get ID token"])))
+                                //group.leave()
+                                
+                                return
+                            }
+                            
+                            self.myToken = token
+                           // group.enter()
+                            
+                            self.fetchUserData(forUsername: username, token: token) { result in
                                 switch result {
-                                case .success():  
-                                    self.loadFoodData2 {
-                                    group.leave()
-                                }
+                                case .success():
+                                    
+                                    let today = Date()
+                                    let dateFormatter = DateFormatter()
+                                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                                    let dateString = dateFormatter.string(from: Date())
+                                    
+                                  //  group.enter()///
+                                    self.fetchDiariesData(forUsername: username, date: dateString) { result in
+                                        switch result {
+                                        case .success():
+                                            self.loadFoodData2 {
+                                                //userFound = true
+                                                DispatchQueue.main.async {
+                                                    completion(.success(()))
+                                                    return }
+                                                //group.leave()
+                                            }
+                                        case .failure(let error):
+                                            print("Error: \(error.localizedDescription)")
+                                            completion(.failure(NSError(domain: "SignInError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve user data"])))
+                                               
+                                            return
+                                           // group.leave()
+                                        }
+                                    }
+        
                                 case .failure(let error):
                                     print("Error: \(error.localizedDescription)")
-                                    group.leave()
-                                } }
-                          
-                        case .failure(let error):
-                            print("Error: \(error.localizedDescription)")
-                            group.leave()
+                                    //group.leave()
+                                    completion(.failure(NSError(domain: "SignInError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve user data"])))
+                                       
+                                    return
+                                }
+                            }
                         }
+                        
+                        break
                     }
-                  
-                    break
                 }
+//                
+//                group.notify(queue: .main) {
+//                    if userFound {
+//                        print("User authenticated successfully!")
+//                        
+//                        completion(.success(()))
+//                    } else {
+//                        print("Invalid username or password")
+//                        completion(.failure(NSError(domain: "SignInError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid username or password"])))
+//                    }
+//                }
             }
-            
-            group.notify(queue: .main) {
-                if userFound {
-                    print("User authenticated successfully!")
-                    
-                    completion(.success(()))
-                } else {
-                    print("Invalid username or password")
-                    completion(.failure(NSError(domain: "SignInError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid username or password"])))
-                }
-            }
-            //print("invalid username or password")
         }
     }
     
-    func fetchUserData(forUsername username: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let baseUrl = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/users.json"
+    func fetchUserData(forUsername username: String, token: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        
+        let baseUrl = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=\(token)"
         guard let url = URL(string: baseUrl) else {
             completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
@@ -252,7 +311,7 @@ class FirebaseManager {
     }
         
     func fetchDiariesData(forUsername username: String, date: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let baseUrl = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/diaries.json"
+        let baseUrl = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/diaries.json?auth=\(self.myToken)"
         guard let url = URL(string: baseUrl) else {
             completion(.failure(NSError(domain: "Diaries", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
@@ -317,7 +376,7 @@ class FirebaseManager {
     
     func changeValue(of key: String, with value: Any, completion: @escaping (Result<Void, Error>) -> Void) {
         let username = UserInfo.shared.username
-        let baseUrl = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/users.json"
+        let baseUrl = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=\(self.myToken)"
         guard let url = URL(string: baseUrl) else {
             completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
@@ -352,7 +411,7 @@ class FirebaseManager {
                         return
                     }
                     
-                    guard let updateUserUrl = URL(string: "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/users/\(uid).json") else {
+                    guard let updateUserUrl = URL(string: "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/users/\(uid).json?auth=\(self.myToken)") else {
                         completion(.failure(NSError(domain: "UserInfo", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
                         return
                     }
@@ -381,7 +440,7 @@ class FirebaseManager {
     func changeValueDiary(of key: String, with value: Any, isPost: Bool, completion: @escaping (Result<Void, Error>) -> Void) {
         let username = UserInfo.shared.username
         let date = DiariesManager.shared.date
-        let baseUrl = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/diaries.json"
+        let baseUrl = "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/diaries.json?auth=\(self.myToken)"
         guard let url = URL(string: baseUrl) else {
             completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
@@ -417,7 +476,7 @@ class FirebaseManager {
                         return
                     }
                     
-                    guard let updateUserUrl = URL(string: "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/diaries/\(did).json") else {
+                    guard let updateUserUrl = URL(string: "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/diaries/\(did).json?auth=\(self.myToken)") else {
                         completion(.failure(NSError(domain: "DiariesManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
                         return
                     }
@@ -444,7 +503,7 @@ class FirebaseManager {
     }
     
     private func loadFoodData2(completion: @escaping () -> Void) {
-        guard let url = URL(string: "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/food.json") else {
+        guard let url = URL(string: "https://calorietracker-4b360-default-rtdb.europe-west1.firebasedatabase.app/food.json?auth=\(self.myToken)") else {
                    print("Invalid URL")
                    return
                }
@@ -471,11 +530,7 @@ class FirebaseManager {
                        do {
                            let foodData = try JSONDecoder().decode(FoodData.self, from: data)
                            self.allFood = Array(foodData.food.values)
-//                           for food in allFood {
-//                               if(DiariesManager.shared.foods![food.name] != nil) {
-//                                   eatenFood.append(food)
-//                               }
-//                           }
+
                          print("LOADED")
                            completion()
                        } catch {

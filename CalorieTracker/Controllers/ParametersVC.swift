@@ -74,6 +74,8 @@ class ParametersVC: UIViewController {
         bottomLine3.backgroundColor = UIColor.white.cgColor
         username.layer.addSublayer(bottomLine3)
         username.textColor = .white
+        username.text = "petar@gmail.com"
+        password.text = "123456"
         
         password.backgroundColor = UIColor.black//.withAlphaComponent(0.5)
         password.borderStyle = .none
