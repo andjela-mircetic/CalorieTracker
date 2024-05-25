@@ -91,9 +91,11 @@ class ParametersVC: UIViewController {
         guard let username = username.text, !username.isEmpty,
               let password = password.text, !password.isEmpty,
               let height = height.text, !height.isEmpty,
-              let weight = weigth.text, !weight.isEmpty else {
+              let weight = weigth.text, !weight.isEmpty,
+              password.count > 5, isValidEmail(username), isValidParameters(w: weight, h: height)
+        else {
             DispatchQueue.main.async {
-                self.showAlert(title: "Empty", message: "Please enter all parameters.")
+                self.showAlert(title: "Empty", message: "Please enter all parameters in right format.")
             }
             return
         }
@@ -113,10 +115,29 @@ class ParametersVC: UIViewController {
         }
     }
     
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "^[A-Za-z0-9]{2,}@gmail\\.com$"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+        return emailTest.evaluate(with: email)
+    }
+    
+    func isValidParameters(w: String, h: String) -> Bool {
+        if let weight = Double(w), let height = Double(h) {
+               if weight >= 25 && weight <= 170 {
+                   if height >= 50 && height <= 220 {
+                       return true
+                   }
+               }
+           }
+           return false
+    }
+    
     @IBAction func pressedSignIn(_ sender: Any) {
         guard let username = username.text, !username.isEmpty,
-              let password = password.text, !password.isEmpty else {
-            showAlert(title: "Empty", message: "Please enter both username and password.")
+              let password = password.text, !password.isEmpty,
+              password.count > 5, isValidEmail(username)
+        else {
+            showAlert(title: "Empty", message: "Please enter username and password in the right format.")
             return }
         
         FirebaseManager.shared.signInUser(username: username, password: password) { result in
